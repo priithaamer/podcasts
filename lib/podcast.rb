@@ -14,6 +14,7 @@ class Podcast
   
   Podcasts = {
     :jazzitup => {:title => 'Jazzitup', :saade => '49', :bow => lambda { return Time.now.beginning_of_week - 86400 }, :image => '66'},
+    :etnokonservid => {:title => 'Etnokonservid', :saade => '52', :bow => lambda { return Time.now.beginning_of_week - 86400 }, :image => '14'},
     :mustmesi => {:title => 'Must Mesi', :saade => '41', :bow => lambda {
       bow = Time.now.beginning_of_week + (3 * 86400)
       bow = Time.now.beginning_of_week - (4 * 86400) if (bow <=> Time.now) > 0
