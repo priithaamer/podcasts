@@ -12,7 +12,7 @@ get '/podcasts/:podcast' do
   erb :podcast
 end
 
-get '/pingme!' do
+get '/pingme' do
   erb :pingme
 end
 
