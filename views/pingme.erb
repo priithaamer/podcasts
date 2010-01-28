@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Ping Me!</title>
+	<style type="text/css" media="screen">
+  	body { text-align: center; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; margin-top: 150px; }
+  	h1 { color: rgb(45, 65, 89); }
+  	input, textarea { -webkit-border-radius: 3px; -moz-border-radius: 3px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; outline: none; }
+  	textarea.pretty { border: 1px solid rgb(119, 119, 119); background-color: #d9d9d9; font-size: 16px; text-shadow: #fff 0px 1px 0px; color: #626d7b; width: 360px; }
+  	input.pretty { border: 1px solid rgb(119, 119, 119); background-color: #d9d9d9; font-size: 16px; text-shadow: #fff 0px 1px 0px; color: #626d7b; width: 358px; }
+  	input.nice { border: 1px solid rgb(119, 119, 119); background-color: #707986; text-shadow: #3b414a 0px -1px 0px; font-size: 26px; color: #fff; width: 362px; }
+  </style>
+</head>
+
+<body>
+  <h1>Ping me!</h1>
+  <form action="/sendping" method="post">
+    <input type="text" name="name" value="Your name" class="pretty" onclick="if(this.value=='Your name'){this.value='';}" /><br/>
+    <textarea name="message" class="pretty" rows="10"></textarea><br/>
+    <input type="submit" value="Send" class="nice" />
+  </form>
+</body>
+</html>
