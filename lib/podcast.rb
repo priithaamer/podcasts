@@ -31,6 +31,11 @@ class Podcast
       bow = Time.now.beginning_of_week - (2 * 86400) if (bow <=> Time.now) > 0
       return bow
     }, :image => '17'},
+    :leviosuti => {:title => 'Leviosuti', :saade => '186', :bow => lambda {
+      bow = Time.now.beginning_of_week + (5 * 86400)
+      bow = Time.now.beginning_of_week - (2 * 86400) if (bow <=> Time.now) > 0
+      return bow
+    }, :image => '112'},
     :kaabel => {:title => 'Kaabel', :saade => '185', :bow => lambda { return Time.now.beginning_of_week }, :image => '105'},
     :eestipops => {:title => 'Eesti Pops', :saade => '284', :bow => lambda { return Time.now.beginning_of_week + 86400 }, :image => '202'},
     :londoncalling => {:title => 'London calling', :saade => '56', :bow => lambda {
