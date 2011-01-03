@@ -52,7 +52,12 @@ class Podcast
       bow = Time.now.beginning_of_week + (4 * 86400)
       bow = Time.now.beginning_of_week - (3 * 86400) if (bow <=> Time.now) > 0
       return bow
-    }, :image => '16'}
+    }, :image => '16'},
+    :retro => {:title => 'Retro', :saade => '287', :bow => lambda {
+      bow = Time.now.beginning_of_week + (5 * 86400)
+      bow = Time.now.beginning_of_week - (2 * 86400) if (bow <=> Time.now) > 0
+      return bow
+    }, :image => '203'}
   }
   
   def initialize(podcast)
