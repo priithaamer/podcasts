@@ -57,6 +57,11 @@ class Podcast
       bow = Time.now.beginning_of_week + (5 * 86400)
       bow = Time.now.beginning_of_week - (2 * 86400) if (bow <=> Time.now) > 0
       return bow
+    }, :image => '203'},
+    :deepershadesofhouse => {:title => 'Deeper Shades of House', :saade => '210', :bow => lambda {
+      bow = Time.now.beginning_of_week + (5 * 86400)
+      bow = Time.now.beginning_of_week - (2 * 86400) if (bow <=> Time.now) > 0
+      return bow
     }, :image => '203'}
   }
   
