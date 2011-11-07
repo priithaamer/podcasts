@@ -37,6 +37,7 @@ class Podcast
       return bow
     }, :image => '112'},
     :kaabel => {:title => 'Kaabel', :saade => '185', :bow => lambda { return Time.now.beginning_of_week }, :image => '105'},
+    :progressioon => {:title => 'Progressioon', :saade => '30', :bow => lambda { return Time.now.beginning_of_week }, :image => '46'},
     :eestipops => {:title => 'Eesti Pops', :saade => '284', :bow => lambda { return Time.now.beginning_of_week + 86400 }, :image => '202'},
     :londoncalling => {:title => 'London calling', :saade => '56', :bow => lambda {
       bow = Time.now.beginning_of_week + (5 * 86400)
