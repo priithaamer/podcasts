@@ -1,13 +1,5 @@
 require 'hpricot'
 require 'open-uri'
-require 'time'
-
-class Time
-  def beginning_of_week
-    days_to_monday = self.wday != 0 ? self.wday - 1 : 6
-    self - days_to_monday * 86400
-  end
-end
 
 class Podcast
   attr_accessor :title, :link, :image, :tracks, :playlist, :pub_date

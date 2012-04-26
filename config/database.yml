@@ -1,0 +1,20 @@
+development:
+  adapter: mysql2
+  database: podcasts_development
+  username: root
+  password:
+  host: localhost
+
+test:
+  adapter: mysql2
+  database: podcasts_test
+  username: root
+  password:
+  host: localhost
+
+production:
+  adapter: mysql2
+  database: podcasts_production
+  username: root
+  password:
+  host: localhost

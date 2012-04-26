@@ -1,10 +1,7 @@
-require 'open-uri'
+#!/usr/bin/env rake
+# Add your own tasks in files placed in lib/tasks ending in .rake,
+# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
-namespace :podcasts do
-  namespace :confreaks do
-    task :fetch_new_episodes do
-      html = File.read('/Users/priit/Sites/podcasts/spec/fixtures/confreaks.html')
-      puts html
-    end
-  end
-end
+require File.expand_path('../config/application', __FILE__)
+
+Podcasts::Application.load_tasks

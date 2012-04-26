@@ -1,7 +1,4 @@
-require 'rubygems'
-require 'nokogiri'
-
-class Confreaks
+class Confreaks << ActiveRecord::Base
   
   def self.fetch
     html = File.read('/Users/priit/Sites/podcasts/spec/fixtures/confreaks.html')
