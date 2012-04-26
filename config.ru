@@ -1,9 +1,16 @@
-require 'rubygems'
-require 'sinatra'
- 
-set :environment, :production
-disable :run
+require 'bundler/setup'
+require 'err_podcasts_server'
+require 'confreaks_podcasts_server'
 
-require 'podcasts.rb'
+configure :development do
+  Sinatra::Application.reset!
+  use Rack::Reloader
+end
 
-run Sinatra::Application
+map '/podcasts' do
+  run ErrPodcastsServer
+end
+
+map '/confreaks' do
+  run ConfreaksPodcastsServer
+end
