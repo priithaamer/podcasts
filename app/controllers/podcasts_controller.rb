@@ -1,6 +1,6 @@
-class PodcastsController < ActionController::Base
+class PodcastsController < ApplicationController
   def show
-    @podcast = Podcast.new(params[:id])
-    render 'show.erb.xml'
+    @podcast = Err.new(params[:id])
+    render 'err.erb.xml'
   end
 end

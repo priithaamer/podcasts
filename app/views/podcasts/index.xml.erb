@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title><%= @podcast.title %></title>
+    <link><%= @podcast.link %></link>
+    <language>et</language>
+
+    <pubDate>Mon, 28 Jan 2008 8:00:00 EET</pubDate>
+    <lastBuildDate>Mon, 28 Jan 2008 10:20:16 EET</lastBuildDate>
+    <docs>http://backend.userland.com/rss</docs> 
+    <generator>Priit ise tegi</generator>
+    <managingEditor>priit@fraktal.ee (Priit Haamer)</managingEditor>
+    <webMaster>priit@fraktal.ee (Priit Haamer)</webMaster>
+
+    <itunes:category text="International" />
+    <itunes:image href="<%= @podcast.image %>" />
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:email>priit@fraktal.ee</itunes:email>
+    <% for item in @podcast.podcast_items.order('remote_id DESC') %>
+    <item>
+      <title><%= item.title %></title>
+      <pubDate><%= item.published_at.gmtime.rfc2822 %></pubDate>
+      <enclosure url="<%= item.location %>" type="<%= item.content_type %>"/>
+      <guid><%= item.guid %></guid>
+      <itunes:subtitle><%= item.description %></itunes:subtitle>
+    </item>
+    <% end %>
+  </channel>
+</rss>

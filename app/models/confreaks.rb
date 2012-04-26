@@ -1,30 +1,31 @@
-class Confreaks << ActiveRecord::Base
-  
-  def self.fetch
-    html = File.read('/Users/priit/Sites/podcasts/spec/fixtures/confreaks.html')
+require 'open-uri'
+
+class Confreaks
+
+  def self.fetch(id)
+    puts "Fetcing http://confreaks.com/videos/#{id}..."
+    html = open("http://confreaks.com/videos/#{id}", 'User-Agent' => 'Confreaks podcast feed fetcher')
     
-    doc = Nokogiri::HTML(html)
+    content = Nokogiri::HTML(html).search('#primary-content')
     
-    title = doc.search('#primary-content .video-title').text.strip
+    conference = content.search('h3').first.text.strip
+    title = content.search('.video-title').text.strip
+    authors = content.search('.video-presenters a').children.collect{ |c| c.text }.join(', ')
+    description = content.search('.video-abstract').text.strip
+    asset = content.search('.video-details .assets .asset-box a').select{ |a| a[:href].include?('large.mp4') }.first[:href]
+    posted_on = content.search('.video-details .video-posted-on strong').text.strip
     
-    authors = doc.search('#primary-content .video-presenters a').children.collect{ |c| c.text }.join(', ')
-    
-    description = doc.search('#primary-content .video-abstract').text.strip
-    
-    # assets = doc.search('#primary-content .video-details .assets .asset-box a')[1][:href]
-    assets = doc.search('#primary-content .video-details .assets .asset-box a').select{ |a| a.text.include?('x720') }.first[:href]
-    
-    preview = doc.search('#primary-content .video-frame video').first[:poster]
-    
-    # video_href = video_doc.search('.assets a').select { |a| a.text.include?(size) }.first
-    
-    puts title.inspect
-    puts authors.inspect
-    puts description.inspect
-    puts assets.inspect
-    puts preview.inspect
+    podcast = Podcast.find_by_code('confreaks')
+    podcast.podcast_items.create(
+      :remote_id => id,
+      :title => [[conference, authors].join(' - '), title].join(': '),
+      :description => description,
+      :guid => asset,
+      :location => asset,
+      :content_type => 'video/mp4',
+      :published_at => DateTime.parse(posted_on)
+    )
+  rescue
+    puts "Could not fetch http://confreaks.com/videos/#{id}:"
   end
 end
-
-
-Confreaks.fetch
