@@ -4,6 +4,10 @@ gem 'rails', '3.2.3'
 gem 'hpricot'
 gem 'nokogiri'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   gem 'mysql2'
 end
