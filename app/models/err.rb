@@ -12,6 +12,11 @@ class Err
       bow = Time.now.beginning_of_week - (4 * 86400) if (bow <=> Time.now) > 0
       return bow
     }, :image => '22'},
+    :kajatuba => {:title => 'Kajatuba', :saade => '209', :bow => lambda {
+      bow = Time.now.beginning_of_week + (3 * 86400)
+      bow = Time.now.beginning_of_week - (4 * 86400) if (bow <=> Time.now) > 0
+      return bow
+    }, :image => '313'},
     :trammjabuss => {:title => 'Tramm ja buss', :saade => '22', :bow => lambda { return Time.now.beginning_of_week }, :image => '9'},
     :vibratsioon => {:title => 'Vibratsioon', :saade => '15', :bow => lambda {
       bow = Time.now.beginning_of_week + (3 * 86400)
