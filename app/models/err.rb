@@ -66,10 +66,10 @@ class Err
   def initialize(podcast)
     @p = Err::Podcasts[podcast.to_sym]
     @bow = @p[:bow].call
-    @link = "http://www.r2.ee/saatelist?saade=#{@p[:saade]}"
-    @image = "http://www.r2.ee/webimage10thumbshow?image_id=#{@p[:image]}"
+    @link = "http://r2.err.ee/saatelist?saade=#{@p[:saade]}"
+    @image = "http://r2.err.ee/webimage10thumbshow?image_id=#{@p[:image]}"
     
-    sources = open("http://www.r2.ee/player_jeroen?saade=#{@p[:saade]}&paev=#{@bow.strftime('%Y-%m-%d')}") { |f| Hpricot(f) }
+    sources = open("http://r2.err.ee/player_jeroen?saade=#{@p[:saade]}&paev=#{@bow.strftime('%Y-%m-%d')}") { |f| Hpricot(f) }
     
     @tracks = Array.new
     
