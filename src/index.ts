@@ -33,8 +33,9 @@ router.get('/feeds/:showId.xml', async (ctx) => {
     return;
   }
   const { show, episodes } = await showCache.get(config);
+  const merged = { ...show, imageUrl: config.imageUrl ?? show.imageUrl };
   ctx.type = 'application/rss+xml; charset=utf-8';
-  ctx.body = renderFeed({ showId: config.id, show, episodes, baseUrl: PUBLIC_BASE_URL });
+  ctx.body = renderFeed({ showId: config.id, show: merged, episodes, baseUrl: PUBLIC_BASE_URL });
 });
 
 router.get('/audio/:showId/:episodeId.mp3', async (ctx) => {
