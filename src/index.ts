@@ -53,7 +53,7 @@ router.get('/audio/:showId/:episodeId.mp3', async (ctx) => {
     ctx.body = 'Unknown episode';
     return;
   }
-  const filePath = await audioCache.ensureDownloaded(showId, episodeId, episode.audio);
+  const filePath = await audioCache.ensureDownloaded(showId, episodeId, episode.audioUrls);
   const stats = await stat(filePath);
   ctx.type = 'audio/mpeg';
   ctx.length = stats.size;

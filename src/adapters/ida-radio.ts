@@ -101,7 +101,14 @@ const pickImage = (ep: IdaEpisode): string | undefined => {
 };
 
 const toEpisode = (ep: IdaEpisode): Episode | null => {
-  if (!ep.soundcloud) {
+  const audioUrls: string[] = [];
+  if (ep.soundcloud) {
+    audioUrls.push(`https://soundcloud.com/${ep.soundcloud}`);
+  }
+  if (ep.mixcloud) {
+    audioUrls.push(`https://mixcloud.com/${ep.mixcloud}`);
+  }
+  if (audioUrls.length === 0) {
     return null;
   }
   return {
@@ -110,7 +117,7 @@ const toEpisode = (ep: IdaEpisode): Episode | null => {
     date: new Date(ep.start),
     description: ep.subtitle ?? undefined,
     imageUrl: pickImage(ep),
-    audio: { url: `https://soundcloud.com/${ep.soundcloud}` },
+    audioUrls,
   };
 };
 

@@ -1,7 +1,6 @@
 import { spawn } from 'node:child_process';
 import { mkdir, rename, rm, stat } from 'node:fs/promises';
 import path from 'node:path';
-import type { AudioSource } from './adapters/types.js';
 
 interface AudioCacheOptions {
   storageDir: string;
@@ -27,7 +26,7 @@ export class AudioCache {
     this.ytDlpPath = ytDlpPath;
   }
 
-  async ensureDownloaded(showId: string, episodeId: string, audio: AudioSource): Promise<string> {
+  async ensureDownloaded(showId: string, episodeId: string, audioUrls: string[]): Promise<string> {
     const filePath = this.pathFor(showId, episodeId);
     if (await fileExists(filePath)) {
       return filePath;
@@ -36,7 +35,7 @@ export class AudioCache {
     if (existing) {
       return existing;
     }
-    const promise = this.download(audio, filePath).finally(() => {
+    const promise = this.downloadFromAny(audioUrls, filePath).finally(() => {
       this.inFlight.delete(filePath);
     });
     this.inFlight.set(filePath, promise);
@@ -47,7 +46,24 @@ export class AudioCache {
     return path.join(this.storageDir, showId, `${episodeId}.mp3`);
   }
 
-  private async download(audio: AudioSource, filePath: string): Promise<string> {
+  private async downloadFromAny(urls: string[], filePath: string): Promise<string> {
+    if (urls.length === 0) {
+      throw new Error('No audio sources available');
+    }
+    const errors: string[] = [];
+    for (const url of urls) {
+      try {
+        return await this.download(url, filePath);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        console.warn(`[audio] ${url} failed: ${message}`);
+        errors.push(`${url}: ${message}`);
+      }
+    }
+    throw new Error(`All audio sources failed:\n${errors.join('\n')}`);
+  }
+
+  private async download(url: string, filePath: string): Promise<string> {
     await mkdir(path.dirname(filePath), { recursive: true });
     const tmpBase = `${filePath}.part`;
     const tmpFile = `${tmpBase}.mp3`;
@@ -63,7 +79,7 @@ export class AudioCache {
       '0',
       '-o',
       `${tmpBase}.%(ext)s`,
-      audio.url,
+      url,
     ];
 
     await new Promise<void>((resolve, reject) => {

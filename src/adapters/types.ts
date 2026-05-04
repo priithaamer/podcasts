@@ -1,14 +1,10 @@
-export interface AudioSource {
-  url: string;
-}
-
 export interface Episode {
   id: string;
   title: string;
   date: Date;
   description?: string;
   imageUrl?: string;
-  audio: AudioSource;
+  audioUrls: string[];
 }
 
 export interface Show {
