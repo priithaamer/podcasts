@@ -23,6 +23,13 @@ export const shows: ShowConfig[] = [
     imageUrl:
       'https://www.idaidaida.net/_next/image?url=https%3A%2F%2Fida-radio.fra1.digitaloceanspaces.com%2Fuploads%2F16934d3f6d3120e24388d722fb1b11ff.jpg&w=3840&q=75',
   },
+  {
+    id: 'inner-space-disco',
+    adapter: idaRadioAdapter,
+    sourceId: 'inner-space-disco',
+    imageUrl:
+      'https://www.idaidaida.net/_next/image?url=https%3A%2F%2Fida-radio.fra1.digitaloceanspaces.com%2Fuploads%2F80b2e657b2bff7305d00a69dc547d6d7.jpg&w=3840&q=75',
+  },
 ];
 
 export const findShow = (id: string): ShowConfig | undefined =>
